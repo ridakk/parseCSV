@@ -30,3 +30,17 @@ becomes
 ```
 [['one', 'two wraps\nonto "two" lines', 'three'], ['4', '', '6']]
 ```
+
+# Scripts
+
+* `npm run build` - produces production version
+* `npm run dev` - produces development version
+* `npm run test` - well ... it runs the tests :)
+
+#Usage
+
+ * input String, CSV input
+ * separator String, single character used to separate fields. Defaults to ","
+ * quote String, single character used to quote non-simple fields. Defaults to "\"".
+
+ CSV.parse(input, separator, quote)

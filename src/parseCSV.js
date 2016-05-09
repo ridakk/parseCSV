@@ -8,7 +8,7 @@
  * @param quote String, single character used to quote non-simple fields.
  *        Defaults to "\"".
  */
-export function parseCSV(input, separator, quote) {
+export function parse(input, separator, quote) {
     var result = [
             ['']
         ],
@@ -16,7 +16,7 @@ export function parseCSV(input, separator, quote) {
         rowIndex = 0,
         columnIndex = 0,
         i,
-        inputLength = input.length,
+        inputLength = (input && input.length) ? input.length : 0,
         quoteField = false;
 
     separator = separator || ',';

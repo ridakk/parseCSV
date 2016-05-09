@@ -16,7 +16,7 @@ if (env === 'build') {
 plugins.push(new CleanWebpackPlugin(['dist']));
 
 var config = {
-  entry: [__dirname + '/src/csv.js'],
+  entry: [__dirname + '/src/parseCSV.js'],
   devtool: 'source-map',
   output: {
     path: __dirname + '/dist',

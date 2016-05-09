@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { parseCSV } from '../src/parseCSV';
+import { parse } from '../src/parseCSV';
 
 describe("Basic CSV Functionality", () => {
     it("should handle an empty file", () => {
@@ -7,14 +7,14 @@ describe("Basic CSV Functionality", () => {
         var output = [
             ['']
         ];
-        expect(parseCSV(input)).to.deep.equal(output);
+        expect(parse(input)).to.deep.equal(output);
     });
     it("should handle a single row", () => {
         var input = "1,2,3";
         var output = [
             ['1', '2', '3']
         ];
-        expect(parseCSV(input)).to.deep.equal(output);
+        expect(parse(input)).to.deep.equal(output);
     });
     it("should handle simple input", () => {
         var input = "1,2,3\n4,5,6";
@@ -22,7 +22,7 @@ describe("Basic CSV Functionality", () => {
             ['1', '2', '3'],
             ['4', '5', '6']
         ];
-        expect(parseCSV(input)).to.deep.equal(output);
+        expect(parse(input)).to.deep.equal(output);
     });
     it("should handle empty fields", () => {
         var input = "1,,3\n4,5,\n,7,8";
@@ -31,7 +31,7 @@ describe("Basic CSV Functionality", () => {
             ['4', '5', ''],
             ['', '7', '8']
         ];
-        expect(parseCSV(input)).to.deep.equal(output);
+        expect(parse(input)).to.deep.equal(output);
     });
     it("should handle spaces within fields", () => {
         var input = "1, 2 ,3\n4,5,6";
@@ -39,7 +39,7 @@ describe("Basic CSV Functionality", () => {
             ['1', ' 2 ', '3'],
             ['4', '5', '6']
         ];
-        expect(parseCSV(input)).to.deep.equal(output);
+        expect(parse(input)).to.deep.equal(output);
     });
     it("should handle uneven rows", () => {
         var input = "1,2,3,4,5,6\n7,8\n9,10,11,12";
@@ -48,7 +48,7 @@ describe("Basic CSV Functionality", () => {
             ['7', '8'],
             ['9', '10', '11', '12']
         ];
-        expect(parseCSV(input)).to.deep.equal(output);
+        expect(parse(input)).to.deep.equal(output);
     });
     it("should handle empty rows", () => {
         var input = "1,2,3\n\n4,5,6";
@@ -57,7 +57,7 @@ describe("Basic CSV Functionality", () => {
             [''],
             ['4', '5', '6']
         ];
-        expect(parseCSV(input)).to.deep.equal(output);
+        expect(parse(input)).to.deep.equal(output);
     });
 });
 
@@ -68,7 +68,7 @@ describe("Quoted Fields", () => {
             ['1', 'two was here', '3'],
             ['4', '5', '6']
         ];
-        expect(parseCSV(input)).to.deep.equal(output);
+        expect(parse(input)).to.deep.equal(output);
     });
     it("should handle empty quoted fields", () => {
         var input = "1,\"\",3\n4,5,6";
@@ -76,7 +76,7 @@ describe("Quoted Fields", () => {
             ['1', '', '3'],
             ['4', '5', '6']
         ];
-        expect(parseCSV(input)).to.deep.equal(output);
+        expect(parse(input)).to.deep.equal(output);
     });
     it("should handle leading and trailing spaces in quoted fields", () => {
         var input = "1,\" two \",3\n4,5,6";
@@ -84,7 +84,7 @@ describe("Quoted Fields", () => {
             ['1', ' two ', '3'],
             ['4', '5', '6']
         ];
-        expect(parseCSV(input)).to.deep.equal(output);
+        expect(parse(input)).to.deep.equal(output);
     });
     it("should handle separators in quoted fields", () => {
         var input = "1,\"two, too\",3\n4,5,6";
@@ -92,7 +92,7 @@ describe("Quoted Fields", () => {
             ['1', 'two, too', '3'],
             ['4', '5', '6']
         ];
-        expect(parseCSV(input)).to.deep.equal(output);
+        expect(parse(input)).to.deep.equal(output);
     });
     it("should handle multi-line quoted fields", () => {
         var input = "1,\"two was\nup there\",3\n4,5,6";
@@ -100,7 +100,7 @@ describe("Quoted Fields", () => {
             ['1', 'two was\nup there', '3'],
             ['4', '5', '6']
         ];
-        expect(parseCSV(input)).to.deep.equal(output);
+        expect(parse(input)).to.deep.equal(output);
     });
     it("should handle multiple separators in multiline quoted fields", () => {
         var input = "one,\",,,,,..two,,,,,\n,,,,,,\",three\n4,,6";
@@ -108,7 +108,7 @@ describe("Quoted Fields", () => {
             ['one', ',,,,,..two,,,,,\n,,,,,,', 'three'],
             ['4', '', '6']
         ];
-        expect(parseCSV(input)).to.deep.equal(output);
+        expect(parse(input)).to.deep.equal(output);
     });
     it("should handle quote characters within quoted fields", () => {
         var input = "1,\"two \"\"quote\"\"\",3\n4,5,6";
@@ -116,7 +116,7 @@ describe("Quoted Fields", () => {
             ['1', 'two "quote"', '3'],
             ['4', '5', '6']
         ];
-        expect(parseCSV(input)).to.deep.equal(output);
+        expect(parse(input)).to.deep.equal(output);
     });
 });
 
@@ -127,7 +127,7 @@ describe("Alternate Characters", () => {
             ['1', '2', '3\tthree'],
             ['4', '5', '6']
         ];
-        expect(parseCSV(input, '\t')).to.deep.equal(output);
+        expect(parse(input, '\t')).to.deep.equal(output);
     });
 
     it("should handle alternate quotes", () => {
@@ -136,7 +136,7 @@ describe("Alternate Characters", () => {
             ['1', '2', '3'],
             ['4', 'this \'is\'\na test', '6']
         ];
-        expect(parseCSV(input, ',', "'")).to.deep.equal(output);
+        expect(parse(input, ',', "'")).to.deep.equal(output);
     });
 });
 
@@ -147,7 +147,7 @@ describe("Regular Expression Special Characters", () => {
             ['1', '2', '3'],
             ['4', '5', '6']
         ];
-        expect(parseCSV(input, '.')).to.deep.equal(output);
+        expect(parse(input, '.')).to.deep.equal(output);
     });
 
     it("should handle using a dollar sign ($) as a quote character", () => {
@@ -156,7 +156,7 @@ describe("Regular Expression Special Characters", () => {
             ['a $string$ using $ as the quote', 'multi\nline', ''],
             ['1.2', '3', '4']
         ];
-        expect(parseCSV(input, '.', '$')).to.deep.equal(output);
+        expect(parse(input, '.', '$')).to.deep.equal(output);
     });
 
     it("should handle using a backslash (\\) as the quote", () => {
@@ -165,7 +165,7 @@ describe("Regular Expression Special Characters", () => {
             ['a \\string\\ using \\ as the quote', 'multi\nline', ''],
             ['1', '2', '3.4']
         ];
-        expect(parseCSV(input, '.', '\\')).to.deep.equal(output);
+        expect(parse(input, '.', '\\')).to.deep.equal(output);
     });
 });
 
@@ -187,6 +187,6 @@ describe("Random Input", () => {
     input = output.map(function(a) {
         return a.join(','); }).join('\n');
     it("should handle random input", () => {
-        expect(parseCSV(input)).to.deep.equal(output);
+        expect(parse(input)).to.deep.equal(output);
     });
 });
