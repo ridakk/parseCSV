@@ -1,0 +1,24 @@
+{
+  "name": "parseCSV",
+  "version": "1.0.0",
+  "description": "Parse CSV files to array",
+  "main": "parseCSV.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ridakk/parseCSV.git"
+  },
+  "keywords": [
+    "JavaScript",
+    "CSV",
+    "parser"
+  ],
+  "author": "Kadir Goktas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ridakk/parseCSV/issues"
+  },
+  "homepage": "https://github.com/ridakk/parseCSV"
+}
